@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Kugelmatik</string>
+
+    <string name="internal_error">Internal error</string>
+    <string name="credits">Henrik Kunzelmann 2017</string>
+
+    <string name="connect">Connect</string>
+    <string name="disconnect">Disconnect</string>
+
+    <string name="host">Host</string>
+    <string name="default_host">192.168.4.1</string>
+
+    <string name="not_connected">Not connected</string>
+    <string name="connecting">Connecting...</string>
+    <string name="connected">Connected (%1$dms, v%2$d, %3$s)</string>
+
+    <string name="current_height">Current height: %d</string>
+
+    <string name="move_to_0">0</string>
+    <string name="move_to_100">100</string>
+    <string name="move_to_6000">6000</string>
+
+    <string name="sub_100">-100</string>
+    <string name="add_100">+100</string>
+    <string name="sub_1000">-1000</string>
+    <string name="add_1000">+1000</string>
+
+    <string name="height">Height</string>
+    <string name="set">Set</string>
+
+    <string name="enable_sensor">Enable sensor</string>
+    <string name="disable_sensor">Disable sensor</string>
+
+    <string name="stop">STOP</string>
+    <string name="home">Home</string>
+</resources>
