@@ -1,211 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.karlkuebelschule.kugelmatikapp.MainActivity"
-    android:orientation="vertical">
+    tools:context="de.karlkuebelschule.kugelmatikapp.MainActivity">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <EditText
-            android:id="@+id/hostEditText"
-            android:layout_width="224dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_weight="1"
-            android:hint="@string/host"
-            android:text="@string/default_host"/>
-        <Button
-            android:id="@+id/connectButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
-            android:layout_weight="1"
-            android:text="@string/connect"
-            android:textAllCaps="false"/>
-    </LinearLayout>
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/hostEditText"
+                android:layout_width="224dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="1"
+                android:hint="@string/host"
+                android:text="@string/default_host"/>
+            <Button
+                android:id="@+id/connectButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:text="@string/connect"
+                android:textAllCaps="false"/>
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/statusText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:textSize="18sp"
-        android:text="@string/not_connected"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="16dp"
-        android:orientation="horizontal">
         <TextView
-            android:id="@+id/heightText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/current_height"/>
-        <TextView
-            android:id="@+id/mcpStatus"
+            android:id="@+id/statusText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:text="@string/mcp_status"/>
-    </LinearLayout>
+            android:textSize="18sp"
+            android:text="@string/not_connected"/>
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/moveTo0Button"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/move_to_0"/>
-        <Button
-            android:id="@+id/moveTo100Button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/move_to_100"/>
-        <Button
-            android:id="@+id/moveTo6000Button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/move_to_6000"/>
-        <Button
-            android:id="@+id/sensorButton"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/enable_sensor"
-            android:textAllCaps="false"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/sub100Button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/sub_100"/>
-        <Button
-            android:id="@+id/add100Button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/add_100"/>
-        <Button
-            android:id="@+id/sub1000Button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/sub_1000"/>
-        <Button
-            android:id="@+id/add1000Button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/add_1000"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="8dp">
-        <EditText
-            android:id="@+id/heightEditText"
-            android:layout_width="128dp"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="@string/height"/>
-        <Button
-            android:id="@+id/setButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/set"
-            android:textAllCaps="false"/>
-    </LinearLayout>
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="16dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/heightText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_height"/>
+            <TextView
+                android:id="@+id/mcpStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="@string/mcp_status"/>
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp">
-        <Button
-            android:id="@+id/blinkGreenButton"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/blink_green"
-            android:textColor="@android:color/holo_green_dark"
-            android:textSize="16sp"
-            android:layout_weight="1"
-            android:textAllCaps="false"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/moveTo0Button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/move_to_0"/>
+            <Button
+                android:id="@+id/moveTo100Button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/move_to_100"/>
+            <Button
+                android:id="@+id/moveTo6000Button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/move_to_6000"/>
+            <Button
+                android:id="@+id/sensorButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/enable_sensor"
+                android:textAllCaps="false"/>
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/blinkRedButton"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/blink_red"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="16sp"
-            android:layout_weight="1"
-            android:textAllCaps="false"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/sub100Button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/sub_100"/>
+            <Button
+                android:id="@+id/add100Button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/add_100"/>
+            <Button
+                android:id="@+id/sub1000Button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/sub_1000"/>
+            <Button
+                android:id="@+id/add1000Button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/add_1000"/>
+        </LinearLayout>
 
-
-        <Button
-            android:id="@+id/homeButton"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/home"
-            android:textColor="@android:color/holo_blue_dark"
-            android:textSize="16sp"
-            android:layout_weight="1"
-            android:textAllCaps="false"/>
-
-        <Button
-            android:id="@+id/clearErrorButton"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/clear_error"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:layout_weight="1"
-            android:textAllCaps="false"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="48dp"
-        android:layout_marginLeft="8dp">
-        <Button
-            android:id="@+id/stopButton"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/stop"
-            android:background="@android:color/holo_red_dark"
-            android:textColor="@android:color/white"
-            android:layout_marginLeft="32dp"
-            android:textSize="18sp"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="8dp">
+            <EditText
+                android:id="@+id/heightEditText"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@string/height"/>
+            <Button
+                android:id="@+id/setButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/set"
+                android:textAllCaps="false"/>
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp">
+            <Button
+                android:id="@+id/blinkGreenButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/blink_green"
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="16sp"
+                android:layout_weight="1"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/blinkRedButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/blink_red"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="16sp"
+                android:layout_weight="1"
+                android:textAllCaps="false"/>
+
+
+            <Button
+                android:id="@+id/homeButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/home"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="16sp"
+                android:layout_weight="1"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/clearErrorButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/clear_error"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:layout_weight="1"
+                android:textAllCaps="false"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="48dp"
+            android:layout_marginLeft="8dp">
+
+
+        </LinearLayout>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/stopButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="48dp"
+        android:text="@string/stop"
+        android:background="@android:color/holo_red_dark"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"/>
 
     <TextView
+        android:id="@+id/creditsText"
+        android:layout_gravity="bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:text="@string/credits"/>
-</LinearLayout>
+</FrameLayout>

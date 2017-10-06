@@ -19,6 +19,7 @@ import java.util.TimerTask;
 
 import de.karlkuebelschule.KugelmatikLibrary.BusyCommand;
 import de.karlkuebelschule.KugelmatikLibrary.Config;
+import de.karlkuebelschule.KugelmatikLibrary.Kugelmatik;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
     private Timer timer = null;
@@ -67,6 +68,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         try {
             setContentView(R.layout.activity_main);
+
+            String credits = getString(R.string.credits, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE, Kugelmatik.VERSION);
+            ((TextView)findViewById(R.id.creditsText)).setText(credits);
 
             host = (EditText) findViewById(R.id.hostEditText);
             connect = (Button) findViewById(R.id.connectButton);

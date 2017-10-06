@@ -2,7 +2,7 @@
     <string name="app_name">Kugelmatik</string>
 
     <string name="internal_error">Internal error (%s)</string>
-    <string name="credits">Henrik Kunzelmann 2017</string>
+    <string name="credits">Henrik Kunzelmann 2017 (%s v%d, library: %d)</string>
 
     <string name="connect">Connect</string>
     <string name="disconnect">Disconnect</string>
