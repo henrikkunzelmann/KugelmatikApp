@@ -273,7 +273,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     mcpStatus.setVisibility(View.INVISIBLE);
                 else {
                     mcpStatus.setVisibility(View.VISIBLE);
-                    mcpStatus.setText(Integer.toBinaryString(kugelmatikManager.getMcpStatus()));
+
+                    String status = String.format("%8s",
+                            Integer.toBinaryString(kugelmatikManager.getMcpStatus())).replace(' ', '0');
+                    mcpStatus.setText(getString(R.string.mcp_status, status));
                 }
 
                 if (sensorEnabled)
