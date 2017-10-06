@@ -28,8 +28,11 @@
     <string name="height">Height</string>
     <string name="set">Set</string>
 
-    <string name="enable_sensor">Enable sensor</string>
-    <string name="disable_sensor">Disable sensor</string>
+    <string name="enable_sensor">Enable Sensor</string>
+    <string name="disable_sensor">Disable Sensor</string>
+
+    <string name="blinkGreen">Blink\nGreen</string>
+    <string name="blinkRed">Blink\nRed</string>
 
     <string name="stop">STOP</string>
     <string name="home">Home</string>

@@ -23,7 +23,8 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
             android:layout_weight="1"
-            android:text="@string/connect"/>
+            android:text="@string/connect"
+            android:textAllCaps="false"/>
     </LinearLayout>
 
     <TextView
@@ -69,7 +70,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/enable_sensor"/>
+            android:text="@string/enable_sensor"
+            android:textAllCaps="false"/>
     </LinearLayout>
 
     <LinearLayout
@@ -118,14 +120,51 @@
             android:id="@+id/setButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/set"/>
+            android:text="@string/set"
+            android:textAllCaps="false"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp">
+        <Button
+            android:id="@+id/blinkGreenButton"
+            android:layout_width="96dp"
+            android:layout_height="match_parent"
+            android:text="@string/blinkGreen"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="16sp"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/blinkRedButton"
+            android:layout_width="96dp"
+            android:layout_height="match_parent"
+            android:text="@string/blinkRed"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="16sp"
+            android:textAllCaps="false"/>
+
+
+        <Button
+            android:id="@+id/homeButton"
+            android:layout_width="96dp"
+            android:layout_height="match_parent"
+            android:text="@string/home"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="16sp"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="96dp"
         android:layout_marginLeft="8dp">
         <Button
             android:id="@+id/stopButton"
@@ -133,16 +172,6 @@
             android:layout_height="wrap_content"
             android:text="@string/stop"
             android:background="@android:color/holo_red_dark"
-            android:textColor="@android:color/white"
-            android:layout_marginLeft="32dp"
-            android:textSize="18sp"/>
-
-        <Button
-            android:id="@+id/homeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/home"
-            android:background="@android:color/holo_blue_dark"
             android:textColor="@android:color/white"
             android:layout_marginLeft="32dp"
             android:textSize="18sp"/>

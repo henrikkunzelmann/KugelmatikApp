@@ -44,8 +44,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private EditText heightEditText;
     private Button setButton;
 
-    private Button stop;
+    private Button blinkGreen;
+    private Button blinkRed;
     private Button home;
+
+    private Button stop;
 
     // Fields for sensor orientation sensor
     private SensorManager mSensorManager;
@@ -80,8 +83,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         heightEditText = (EditText) findViewById(R.id.heightEditText);
         setButton = (Button) findViewById(R.id.setButton);
 
-        stop = (Button) findViewById(R.id.stopButton);
+        blinkGreen = (Button) findViewById(R.id.blinkGreenButton);
+        blinkRed = (Button) findViewById(R.id.blinkRedButton);
         home = (Button) findViewById(R.id.homeButton);
+
+        stop = (Button) findViewById(R.id.stopButton);
 
         connect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,20 +148,25 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
 
+        blinkGreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                kugelmatikManager.blinkGreen();
+            }
+        });
+
+        blinkRed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                kugelmatikManager.blinkRed();
+            }
+        });
+
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sensorEnabled = false;
                 kugelmatikManager.sendStop();
-                updateUI();
-            }
-        });
-
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sensorEnabled = false;
-                kugelmatikManager.sendHome();
                 updateUI();
             }
         });
@@ -259,8 +270,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             heightEditText.setEnabled(enableManual);
             setButton.setEnabled(enableManual);
             sensor.setEnabled(isConnected);
+            blinkGreen.setEnabled(kugelmatikManager.isLoaded());
+            blinkRed.setEnabled(kugelmatikManager.isLoaded());
+            home.setEnabled(isConnected);
             stop.setEnabled(kugelmatikManager.isLoaded());
-            home.setEnabled(kugelmatikManager.isLoaded());
         }
         catch(Exception e) {
             e.printStackTrace();

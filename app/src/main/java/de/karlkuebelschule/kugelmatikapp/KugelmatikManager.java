@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import de.karlkuebelschule.KugelmatikLibrary.Cluster;
 import de.karlkuebelschule.KugelmatikLibrary.ClusterInfo;
 import de.karlkuebelschule.KugelmatikLibrary.Config;
 import de.karlkuebelschule.KugelmatikLibrary.ErrorCode;
@@ -60,36 +61,40 @@ public class KugelmatikManager {
         task.execute();
     }
 
+    private synchronized Cluster getCluster() {
+        return kugelmatik.getClusterByPosition(0, 0);
+    }
+
     public synchronized boolean isLoaded() {
         return kugelmatik != null;
     }
 
     public synchronized boolean isConnected() {
-        if (kugelmatik == null)
+        if (!isLoaded())
             return false;
 
-        return kugelmatik.isAnyClusterOnline();
+        return getCluster().checkConnection();
     }
 
     public synchronized int getPing() {
-        if (kugelmatik == null)
+        if (!isLoaded())
             return 0;
-        return kugelmatik.getClusterByPosition(0, 0).getPing();
+        return getCluster().getPing();
     }
 
     public synchronized int getVersion() {
-        if (kugelmatik == null)
+        if (!isLoaded())
             return 0;
-        ClusterInfo info = kugelmatik.getClusterByPosition(0, 0).getClusterInfo();
+        ClusterInfo info = getCluster().getClusterInfo();
         if (info == null)
             return 0;
         return info.getBuildVersion();
     }
 
     public synchronized ErrorCode getError() {
-        if (kugelmatik == null)
+        if (!isLoaded())
             return ErrorCode.UnknownError;
-        ClusterInfo info = kugelmatik.getClusterByPosition(0, 0).getClusterInfo();
+        ClusterInfo info = getCluster().getClusterInfo();
         if (info == null)
             return ErrorCode.UnknownError;
         return info.getLastErrorCode();
@@ -105,9 +110,19 @@ public class KugelmatikManager {
             kugelmatik.sendStop();
     }
 
+    public synchronized void blinkGreen() {
+        if (isLoaded())
+            getCluster().blinkGreen();
+    }
+
+    public synchronized void blinkRed() {
+        if (isLoaded())
+            getCluster().blinkRed();
+    }
+
     public synchronized void sendHome() {
         if (isLoaded())
-            kugelmatik.getAllCluster()[0].sendHome();
+            getCluster().sendHome();
     }
 
     public synchronized void setHeight(int height) {
