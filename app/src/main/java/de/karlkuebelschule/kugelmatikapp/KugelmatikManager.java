@@ -153,6 +153,13 @@ public class KugelmatikManager {
         }
     }
 
+    public synchronized void clearError() {
+        if (isLoaded()) {
+            getCluster().sendClearError();
+            sendInfo();
+        }
+    }
+
     public synchronized void setHeight(int height) {
         if (isLoaded()) {
             height = Math.min(Config.MaxHeight, Math.max(0, height));

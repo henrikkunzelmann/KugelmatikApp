@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private Button blinkGreen;
     private Button blinkRed;
     private Button home;
+    private Button clearError;
 
     private Button stop;
 
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         blinkGreen = (Button) findViewById(R.id.blinkGreenButton);
         blinkRed = (Button) findViewById(R.id.blinkRedButton);
         home = (Button) findViewById(R.id.homeButton);
+        clearError = (Button) findViewById(R.id.clearErrorButton);
 
         stop = (Button) findViewById(R.id.stopButton);
 
@@ -171,6 +173,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 sensorEnabled = false;
                 kugelmatikManager.sendHome();
                 updateUI();
+            }
+        });
+
+        clearError.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                kugelmatikManager.clearError();
             }
         });
 
@@ -299,6 +308,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             blinkGreen.setEnabled(kugelmatikManager.isLoaded());
             blinkRed.setEnabled(kugelmatikManager.isLoaded());
             home.setEnabled(isConnected);
+            clearError.setEnabled(isConnected);
             stop.setEnabled(kugelmatikManager.isLoaded());
         }
         catch(Exception e) {
