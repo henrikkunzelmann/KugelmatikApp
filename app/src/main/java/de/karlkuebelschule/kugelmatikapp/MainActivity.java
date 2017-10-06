@@ -260,7 +260,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 height.setVisibility(View.VISIBLE);
                 height.setText(getString(R.string.current_height, kugelmatikManager.getHeight()));
 
-                mcpStatus.setVisibility(View.INVISIBLE);
+                if (kugelmatikManager.getMcpStatus() < 0 || kugelmatikManager.getMcpStatus() == 0xFF)
+                    mcpStatus.setVisibility(View.INVISIBLE);
+                else {
+                    mcpStatus.setVisibility(View.VISIBLE);
+                    mcpStatus.setText(Integer.toBinaryString(kugelmatikManager.getMcpStatus()));
+                }
 
                 if (sensorEnabled)
                     sensor.setText(R.string.disable_sensor);
@@ -319,21 +324,27 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onStop() {
         super.onStop();
-
-        if (kugelmatikManager != null)
-            kugelmatikManager.free();
+        kugelmatikManager.free();
     }
+
+    private long timerTickCount = 0;
 
     private synchronized void runTick() {
         if (timer != null)
             timer.cancel();
+
+        timerTickCount = 0;
 
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 try {
-                    kugelmatikManager.sendPing();
+                    if (timerTickCount % 4 == 0)
+                        kugelmatikManager.sendPing();
+
+                    if (timerTickCount % 8 == 0)
+                        kugelmatikManager.sendInfo();
 
                     if (sensorEnabled) {
                         synchronized (mOrientationAngles) {
@@ -346,6 +357,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     }
 
                     invokeUpdateUI();
+                    timerTickCount++;
                 }
                 catch(Exception e) {
                     e.printStackTrace();
@@ -357,7 +369,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     });
                 }
             }
-        }, 0, 200);
+        }, 0, 50);
     }
 
     @Override

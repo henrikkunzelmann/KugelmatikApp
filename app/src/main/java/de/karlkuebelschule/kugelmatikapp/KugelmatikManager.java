@@ -110,14 +110,30 @@ public class KugelmatikManager {
         return info.getCurrentBusyCommand();
     }
 
+    public synchronized int getMcpStatus() {
+        if (!isLoaded())
+            return -1;
+        ClusterInfo info = getCluster().getClusterInfo();
+        if (info == null)
+            return -1;
+        return info.getMcpStatus();
+    }
+
     public synchronized void sendPing() {
         if (isLoaded())
             kugelmatik.sendPing();
     }
 
-    public synchronized void sendStop() {
+    public synchronized void sendInfo() {
         if (isLoaded())
+            getCluster().sendGetClusterConfig();
+    }
+
+    public synchronized void sendStop() {
+        if (isLoaded()) {
             kugelmatik.sendStop();
+            sendInfo();
+        }
     }
 
     public synchronized void blinkGreen() {
@@ -131,8 +147,10 @@ public class KugelmatikManager {
     }
 
     public synchronized void sendHome() {
-        if (isLoaded())
+        if (isLoaded()) {
             getCluster().sendHome();
+            sendInfo();
+        }
     }
 
     public synchronized void setHeight(int height) {
