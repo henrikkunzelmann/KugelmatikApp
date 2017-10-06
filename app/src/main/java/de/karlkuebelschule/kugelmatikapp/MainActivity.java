@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private TextView status;
     private TextView height;
+    private TextView mcpStatus;
 
     private Button moveTo0;
     private Button moveTo100;
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         status = (TextView) findViewById(R.id.statusText);
         height = (TextView) findViewById(R.id.heightText);
+        mcpStatus = (TextView) findViewById(R.id.mcpStatus);
 
         moveTo0 = (Button) findViewById(R.id.moveTo0Button);
         moveTo100 = (Button) findViewById(R.id.moveTo100Button);
@@ -162,6 +164,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
 
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sensorEnabled = false;
+                kugelmatikManager.sendHome();
+                updateUI();
+            }
+        });
+
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -242,6 +253,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 height.setVisibility(View.VISIBLE);
                 height.setText(getString(R.string.current_height, kugelmatikManager.getHeight()));
 
+                mcpStatus.setVisibility(View.INVISIBLE);
+
                 if (sensorEnabled)
                     sensor.setText(R.string.disable_sensor);
                 else
@@ -256,6 +269,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 }
 
                 height.setVisibility(View.INVISIBLE);
+                mcpStatus.setVisibility(View.INVISIBLE);
                 sensor.setText(R.string.enable_sensor);
             }
 
