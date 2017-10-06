@@ -17,6 +17,7 @@ import android.widget.Toast;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import de.karlkuebelschule.KugelmatikLibrary.BusyCommand;
 import de.karlkuebelschule.KugelmatikLibrary.Config;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
@@ -248,7 +249,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             if (isConnected) {
                 connect.setText(R.string.disconnect);
-                status.setText(getString(R.string.connected, kugelmatikManager.getPing(), kugelmatikManager.getVersion(), kugelmatikManager.getError().name()));
+
+                BusyCommand busyCommand = kugelmatikManager.getBusyCommand();
+                String busyCommandString = "";
+                if (busyCommand != BusyCommand.Unknown && busyCommand != BusyCommand.None)
+                    busyCommandString = ", " + busyCommand.name();
+
+                status.setText(getString(R.string.connected, kugelmatikManager.getPing(), kugelmatikManager.getVersion(), kugelmatikManager.getError().name(), busyCommandString));
 
                 height.setVisibility(View.VISIBLE);
                 height.setText(getString(R.string.current_height, kugelmatikManager.getHeight()));

@@ -12,7 +12,7 @@
 
     <string name="not_connected">Not connected</string>
     <string name="connecting">Connecting...</string>
-    <string name="connected">Connected (%1$dms, v%2$d, %3$s)</string>
+    <string name="connected">Connected\n(%1$dms, v%2$d, %3$s%4$s)</string>
 
     <string name="current_height">Current height: %d</string>
     <string name="mcp_status">MCP Status: %s</string>

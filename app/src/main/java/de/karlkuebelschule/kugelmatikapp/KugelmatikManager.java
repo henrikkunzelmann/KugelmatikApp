@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import de.karlkuebelschule.KugelmatikLibrary.BusyCommand;
 import de.karlkuebelschule.KugelmatikLibrary.Cluster;
 import de.karlkuebelschule.KugelmatikLibrary.ClusterInfo;
 import de.karlkuebelschule.KugelmatikLibrary.Config;
@@ -98,6 +99,15 @@ public class KugelmatikManager {
         if (info == null)
             return ErrorCode.UnknownError;
         return info.getLastErrorCode();
+    }
+
+    public synchronized BusyCommand getBusyCommand() {
+        if (!isLoaded())
+            return BusyCommand.Unknown;
+        ClusterInfo info = getCluster().getClusterInfo();
+        if (info == null)
+            return BusyCommand.Unknown;
+        return info.getCurrentBusyCommand();
     }
 
     public synchronized void sendPing() {
