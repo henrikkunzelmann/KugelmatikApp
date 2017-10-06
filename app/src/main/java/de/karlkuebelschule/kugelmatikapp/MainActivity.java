@@ -65,138 +65,143 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        try {
+            setContentView(R.layout.activity_main);
 
-        host = (EditText) findViewById(R.id.hostEditText);
-        connect = (Button) findViewById(R.id.connectButton);
+            host = (EditText) findViewById(R.id.hostEditText);
+            connect = (Button) findViewById(R.id.connectButton);
 
-        status = (TextView) findViewById(R.id.statusText);
-        height = (TextView) findViewById(R.id.heightText);
-        mcpStatus = (TextView) findViewById(R.id.mcpStatus);
+            status = (TextView) findViewById(R.id.statusText);
+            height = (TextView) findViewById(R.id.heightText);
+            mcpStatus = (TextView) findViewById(R.id.mcpStatus);
 
-        moveTo0 = (Button) findViewById(R.id.moveTo0Button);
-        moveTo100 = (Button) findViewById(R.id.moveTo100Button);
-        moveTo6000 = (Button) findViewById(R.id.moveTo6000Button);
-        sensor = (Button) findViewById(R.id.sensorButton);
+            moveTo0 = (Button) findViewById(R.id.moveTo0Button);
+            moveTo100 = (Button) findViewById(R.id.moveTo100Button);
+            moveTo6000 = (Button) findViewById(R.id.moveTo6000Button);
+            sensor = (Button) findViewById(R.id.sensorButton);
 
-        sub100 = (Button) findViewById(R.id.sub100Button);
-        add100 = (Button) findViewById(R.id.add100Button);
-        sub1000 = (Button) findViewById(R.id.sub1000Button);
-        add1000 = (Button) findViewById(R.id.add1000Button);
+            sub100 = (Button) findViewById(R.id.sub100Button);
+            add100 = (Button) findViewById(R.id.add100Button);
+            sub1000 = (Button) findViewById(R.id.sub1000Button);
+            add1000 = (Button) findViewById(R.id.add1000Button);
 
-        heightEditText = (EditText) findViewById(R.id.heightEditText);
-        setButton = (Button) findViewById(R.id.setButton);
+            heightEditText = (EditText) findViewById(R.id.heightEditText);
+            setButton = (Button) findViewById(R.id.setButton);
 
-        blinkGreen = (Button) findViewById(R.id.blinkGreenButton);
-        blinkRed = (Button) findViewById(R.id.blinkRedButton);
-        home = (Button) findViewById(R.id.homeButton);
-        clearError = (Button) findViewById(R.id.clearErrorButton);
+            blinkGreen = (Button) findViewById(R.id.blinkGreenButton);
+            blinkRed = (Button) findViewById(R.id.blinkRedButton);
+            home = (Button) findViewById(R.id.homeButton);
+            clearError = (Button) findViewById(R.id.clearErrorButton);
 
-        stop = (Button) findViewById(R.id.stopButton);
+            stop = (Button) findViewById(R.id.stopButton);
 
-        connect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    synchronized (kugelmatikManager) {
-                        if (kugelmatikManager.isLoaded())
-                            kugelmatikManager.free();
-                        else {
-                            String hostText = host.getText().toString().trim();
+            connect.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    try {
+                        synchronized (kugelmatikManager) {
+                            if (kugelmatikManager.isLoaded())
+                                kugelmatikManager.free();
+                            else {
+                                String hostText = host.getText().toString().trim();
 
-                            if (hostText.length() > 0) {
-                                if (hostText.equalsIgnoreCase("*"))
-                                    kugelmatikManager.loadKugelmatik();
-                                else
-                                    kugelmatikManager.load(hostText);
+                                if (hostText.length() > 0) {
+                                    if (hostText.equalsIgnoreCase("*"))
+                                        kugelmatikManager.loadKugelmatik();
+                                    else
+                                        kugelmatikManager.load(hostText);
+                                }
+                                runTick();
                             }
-                            runTick();
                         }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        showError(e);
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    showError();
+                    sensorEnabled = false;
+                    updateUI();
                 }
-                sensorEnabled = false;
-                updateUI();
-            }
-        });
+            });
 
-        setHeightButton(moveTo0, 0);
-        setHeightButton(moveTo100, 100);
-        setHeightButton(moveTo6000, 6000);
+            setHeightButton(moveTo0, 0);
+            setHeightButton(moveTo100, 100);
+            setHeightButton(moveTo6000, 6000);
 
-        setAddHeightButton(sub100, -100);
-        setAddHeightButton(add100, 100);
-        setAddHeightButton(sub1000, -1000);
-        setAddHeightButton(add1000, 1000);
+            setAddHeightButton(sub100, -100);
+            setAddHeightButton(add100, 100);
+            setAddHeightButton(sub1000, -1000);
+            setAddHeightButton(add1000, 1000);
 
-        setButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    String text = heightEditText.getText().toString().trim();
-                    if (text.length() > 0)
-                        kugelmatikManager.setHeight(Integer.parseInt(text));
+            setButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    try {
+                        String text = heightEditText.getText().toString().trim();
+                        if (text.length() > 0)
+                            kugelmatikManager.setHeight(Integer.parseInt(text));
+                    } catch (Exception e) {
+                        showError(e);
+                        e.printStackTrace();
+                    }
                 }
-                catch(Exception e) {
-                    showError();
-                    e.printStackTrace();
+            });
+
+            sensor.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    sensorEnabled = !sensorEnabled;
+                    updateUI();
                 }
-            }
-        });
+            });
 
-        sensor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sensorEnabled = !sensorEnabled;
-                updateUI();
-            }
-        });
+            blinkGreen.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    kugelmatikManager.blinkGreen();
+                }
+            });
 
-        blinkGreen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                kugelmatikManager.blinkGreen();
-            }
-        });
+            blinkRed.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    kugelmatikManager.blinkRed();
+                }
+            });
 
-        blinkRed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                kugelmatikManager.blinkRed();
-            }
-        });
+            home.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    sensorEnabled = false;
+                    kugelmatikManager.sendHome();
+                    updateUI();
+                }
+            });
 
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sensorEnabled = false;
-                kugelmatikManager.sendHome();
-                updateUI();
-            }
-        });
+            clearError.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    kugelmatikManager.clearError();
+                }
+            });
 
-        clearError.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                kugelmatikManager.clearError();
-            }
-        });
+            stop.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    sensorEnabled = false;
+                    kugelmatikManager.sendStop();
+                    updateUI();
+                }
+            });
 
-        stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sensorEnabled = false;
-                kugelmatikManager.sendStop();
-                updateUI();
-            }
-        });
+            mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-
-        updateUI();
-        runTick();
+            updateUI();
+            runTick();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            showError(e);
+        }
     }
 
     private void setHeightButton(Button button, final int height) {
@@ -207,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     kugelmatikManager.setHeight(height);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    showError();
+                    showError(e);
                 }
             }
         });
@@ -228,19 +233,20 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 }
                 catch(Exception e) {
                     e.printStackTrace();
-                    showError();
+                    showError(e);
                 }
             }
         });
     }
 
-    private void showError() {
+    private void showError(Exception e) {
         try {
-            Toast.makeText(this, R.string.internal_error, Toast.LENGTH_LONG).show();
+            String errorName = (e == null) ? "null" : e.getClass().getSimpleName();
+            Toast.makeText(this, getString(R.string.internal_error, errorName), Toast.LENGTH_LONG).show();
             updateUI();
         }
-        catch(Exception e) {
-            e.printStackTrace();
+        catch(Exception ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -317,7 +323,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
         catch(Exception e) {
             e.printStackTrace();
-            showError();
+            showError(e);
         }
     }
 
@@ -373,12 +379,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     invokeUpdateUI();
                     timerTickCount++;
                 }
-                catch(Exception e) {
+                catch(final Exception e) {
                     e.printStackTrace();
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showError();
+                            showError(e);
                         }
                     });
                 }
