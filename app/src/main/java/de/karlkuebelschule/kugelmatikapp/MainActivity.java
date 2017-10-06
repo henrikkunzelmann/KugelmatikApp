@@ -136,7 +136,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             public void onClick(View view) {
                 try {
                     String text = heightEditText.getText().toString().trim();
-                    kugelmatikManager.setHeight(Integer.parseInt(text));
+                    if (text.length() > 0)
+                        kugelmatikManager.setHeight(Integer.parseInt(text));
                 }
                 catch(Exception e) {
                     showError();
